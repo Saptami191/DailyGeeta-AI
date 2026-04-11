@@ -44,7 +44,6 @@ export default function Navbar() {
             
             <Show when="signed-in">
               <UserButton 
-                afterSignOutUrl="/"
                 appearance={{
                   elements: {
                     userButtonAvatarBox: "w-10 h-10 border-2 border-orange-100",
