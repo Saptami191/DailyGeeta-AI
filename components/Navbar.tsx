@@ -17,14 +17,14 @@ export default function Navbar() {
         {/* Options / Actions */}
         <div className="flex items-center gap-6">
           <Show when="signed-in">
-            <Link 
-              href="/library/saved" 
+            <Link
+              href="/library/saved"
               className="hidden md:flex items-center gap-2 px-5 py-2 text-zinc-600 rounded-full text-sm font-bold hover:bg-zinc-100 transition-all active:scale-95"
             >
               📔 My Collection
             </Link>
-            <Link 
-              href="/premium" 
+            <Link
+              href="/premium"
               className="hidden md:flex items-center gap-2 px-5 py-2 bg-orange-50 text-orange-700 rounded-full text-sm font-bold border border-orange-200 hover:bg-orange-100 hover:shadow-sm transition-all active:scale-95"
             >
               <span className="text-lg leading-none">✨</span>
@@ -41,9 +41,9 @@ export default function Navbar() {
                 </button>
               </SignInButton>
             </Show>
-            
+
             <Show when="signed-in">
-              <UserButton 
+              <UserButton
                 appearance={{
                   elements: {
                     userButtonAvatarBox: "w-10 h-10 border-2 border-orange-100",
@@ -58,4 +58,9 @@ export default function Navbar() {
     </nav>
   );
 }
-
+
+
+
+
+
+
