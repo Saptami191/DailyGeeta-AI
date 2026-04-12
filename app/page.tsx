@@ -11,6 +11,8 @@ import { useUser } from "@clerk/nextjs"; // Added Clerk
 import { supabase } from "../lib/supabase"; // Added Supabase
 import Link from "next/link";
 
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://daily-geeta-ai.vercel.app";
+
 export default function Home() {
   const { user } = useUser(); // Get logged-in user details
   const [verse, setVerse] = useState<any>(null);
@@ -224,7 +226,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button 
               onClick={() => {
-                const text = `*Daily Geeta Insight*%0A%0AChapter ${verse.chapter_number}, Verse ${verse.verse_number}%0A%0A"${verse.text}"%0A%0ARead more at: ${window.location.href}`;
+                const text = `*Daily Geeta Insight*%0A%0AChapter ${verse.chapter_number}, Verse ${verse.verse_number}%0A%0A"${verse.text}"%0A%0ARead more at: ${siteUrl}`;
                 window.open(`https://wa.me/?text=${text}`, '_blank');
               }}
               className="group flex items-center gap-3 bg-green-600 text-white px-8 py-4 rounded-full font-bold shadow-lg hover:bg-green-700 hover:scale-105 active:scale-95 transition-all w-full sm:w-auto justify-center"

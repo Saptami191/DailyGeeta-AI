@@ -29,10 +29,12 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Profile not found" }, { status: 404 });
     }
 
-    // 2. Usage Guard (3-Message Teaser)
-    if (!profile.is_premium && profile.free_chats_used >= 3) {
+    // --- USAGE LIMIT CONFIGURATION ---
+    const FREE_LIMIT = 20; // Increased to 20 for your testing phase
+
+    if (!profile.is_premium && profile.free_chats_used >= FREE_LIMIT) {
       return NextResponse.json(
-        { error: "PREMIUM_REQUIRED", message: "You have reached the limit of your free seeker's journey." }, 
+        { error: "PREMIUM_REQUIRED", message: "You have reached the limit of your seeker's journey. Please upgrade to continue." }, 
         { status: 403 }
       );
     }

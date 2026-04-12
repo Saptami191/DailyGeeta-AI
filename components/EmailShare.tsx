@@ -15,7 +15,7 @@ export default function EmailShare({ verseText, chapterNumber, verseNumber, tran
   const [showEmailForm, setShowEmailForm] = useState(false);
 
   const formatEmailContent = () => {
-    const baseUrl = window.location.origin;
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || window.location.origin;
     const subject = encodeURIComponent(`Daily Geeta - Chapter ${chapterNumber}, Verse ${verseNumber}`);
     
     const emailBody = `Dear Friend,

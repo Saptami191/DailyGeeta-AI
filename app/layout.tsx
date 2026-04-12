@@ -16,8 +16,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://daily-geeta-ai.vercel.app"),
   title: "Daily Geeta | Wisdom for the Modern World",
   description: "Read the Bhagavad Gita daily in Hindi and English with AI insights.",
+  openGraph: {
+    title: "Daily Geeta",
+    description: "Daily Bhagavad Gita verses with AI insights.",
+    url: "https://daily-geeta-ai.vercel.app",
+    siteName: "Daily Geeta",
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
