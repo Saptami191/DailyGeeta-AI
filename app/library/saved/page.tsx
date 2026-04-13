@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
 import { checkAccess } from "@/lib/access";
+import RemoveFavoriteButton from "@/components/RemoveFavoriteButton";
 
 export default async function SavedCollectionPage() {
   const { userId } = await auth();
@@ -151,25 +152,11 @@ export default async function SavedCollectionPage() {
                     </Link>
                   </div>
                   
-                  <button 
-                    onClick={async () => {
-                      const res = await fetch("/api/favorites/toggle", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ 
-                          chapter_id: verse.chapter_number, 
-                          verse_number: verse.verse_number 
-                        }),
-                      });
-                      if (res.ok) {
-                        window.location.reload(); // Simple approach to update after removal
-                      }
-                    }}
-                    className="flex items-center gap-2 px-4 py-2 text-zinc-400 hover:text-red-500 transition-colors text-sm font-medium"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-                    Remove
-                  </button>
+                  <RemoveFavoriteButton 
+                    chapter={verse.chapter_number} 
+                    verse={verse.verse_number} 
+                  />
+
                 </div>
               </div>
             ))}
