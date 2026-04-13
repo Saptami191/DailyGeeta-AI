@@ -1,6 +1,9 @@
 "use client";
 
+import { useUser } from "@clerk/nextjs";
+
 export default function Premium() {
+  const { user } = useUser();
   const features = [
     { 
       title: "AI Gita Mentor", 
@@ -25,6 +28,11 @@ export default function Premium() {
   ];
 
   const makePayment = async () => {
+    if (!user) {
+      alert("Please sign in to continue.");
+      return;
+    }
+
     try {
       // 1. Get the Order ID from your backend
       const res = await fetch("/api/razorpay", { method: "POST" });
@@ -70,8 +78,11 @@ export default function Premium() {
           }
         },
         prefill: {
-          name: "Saptami Biswas", 
-          email: "saptami@example.com",
+          name: user.fullName || "Seeker", 
+          email: user.primaryEmailAddress?.emailAddress || "",
+        },
+        notes: {
+          user_id: user.id // <--- THIS IS THE MAGIC BRIDGE
         },
         theme: { color: "#ea580c" }, // Orange to match your UI
       };
@@ -83,6 +94,7 @@ export default function Premium() {
       alert("An unexpected error occurred. Check the console for details.");
     }
   };
+
 
   return (
     <main className="min-h-screen bg-[#fffcf5] relative overflow-hidden pt-32 pb-20 px-6">
