@@ -32,7 +32,8 @@ export default async function SavedCollectionPage() {
     (favorites || []).map(async (fav) => {
       try {
         const response = await fetch(
-          `https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${fav.chapter_id}/verses/${fav.verse_number}/`,
+          `https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${fav.chapter}/verses/${fav.verse}/`,
+
           {
             headers: {
               "x-rapidapi-key": process.env.RAPID_GITA_KEY as string,

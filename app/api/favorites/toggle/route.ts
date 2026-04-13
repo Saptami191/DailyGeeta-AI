@@ -17,8 +17,8 @@ export async function POST(req: Request) {
       .select("id")
       .match({ 
         user_id: userId, 
-        chapter_id: chapter_id, 
-        verse_number: verse_number 
+        chapter: chapter_id, 
+        verse: verse_number 
       })
       .single();
 
@@ -37,13 +37,14 @@ export async function POST(req: Request) {
         .from("favorites")
         .insert([{ 
           user_id: userId, 
-          chapter_id: chapter_id, 
-          verse_number: verse_number
+          chapter: chapter_id, 
+          verse: verse_number
         }]);
       
       if (insertError) throw insertError;
       return NextResponse.json({ saved: true });
     }
+
   } catch (error: any) {
     console.error("Favorites Toggle Error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
