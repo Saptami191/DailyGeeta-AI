@@ -44,7 +44,7 @@ export default async function SavedCollectionPage() {
         );
         if (!response.ok) return null;
         const data = await response.json();
-        return { ...data, saved_at: fav.created_at };
+        return { ...data, saved_at: fav.created_at, favorite_id: fav.id };
       } catch (err) {
         return null;
       }
@@ -99,7 +99,7 @@ export default async function SavedCollectionPage() {
           <div className="grid gap-12">
             {validVerses.map((verse: any) => (
               <div 
-                key={`${verse.chapter_number}-${verse.verse_number}`} 
+                key={verse.favorite_id} 
                 className="group bg-white rounded-[3rem] p-8 md:p-12 border border-orange-100 shadow-sm hover:shadow-xl transition-all duration-500 relative"
               >
                 {/* Verse Identifier */}

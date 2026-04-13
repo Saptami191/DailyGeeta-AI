@@ -114,8 +114,12 @@ export default function Home() {
         }
       },
       prefill: { email: user.primaryEmailAddress?.emailAddress },
+      notes: {
+        user_id: user.id // <--- THIS IS THE MAGIC BRIDGE
+      },
       theme: { color: "#ea580c" },
     };
+
 
     const rzp = new (window as any).Razorpay(options);
     rzp.open();
