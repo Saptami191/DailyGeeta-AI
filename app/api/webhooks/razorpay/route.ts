@@ -10,15 +10,16 @@ export async function POST(req: Request) {
       // 'user_id' must be passed in the 'notes' field during checkout
       const userId = body.payload.payment.entity.notes.user_id;
 
-      // Update Supabase: Set to Pro and add 100 credits
+      // Update Supabase: Set to Premium and add 100 credits
       const { error } = await supabase
         .from('profiles')
         .update({ 
-          is_pro: true, 
+          is_premium: true, 
           plan_type: 'premium', 
           credits: 100 
         })
-        .eq('id', userId);
+        .eq('clerk_id', userId);
+
 
       if (error) throw error;
       console.log(`✅ Success: User ${userId} is now Pro.`);

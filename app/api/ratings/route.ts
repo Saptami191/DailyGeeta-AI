@@ -77,11 +77,8 @@ export async function POST(request: NextRequest) {
 
     // Award points for rating (1 point per rating)
     const { error: pointsError } = await supabase
-      .from('profiles')
-      .update({ 
-        points: supabase.rpc('increment_points', { user_id: userId, increment: 1 })
-      })
-      .eq('clerk_id', userId);
+      .rpc('increment_points', { user_id: userId, increment: 1 });
+
 
     if (pointsError) {
       console.error('Error awarding points for rating:', pointsError);

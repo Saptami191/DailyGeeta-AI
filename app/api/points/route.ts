@@ -101,14 +101,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Update user points
-    const { data: updatedProfile, error: updateError } = await supabase
-      .from('profiles')
-      .update({ 
-        points: supabase.rpc('increment_points', { user_id: userId, increment: pointsAwarded })
-      })
-      .eq('clerk_id', userId)
-      .select('points')
-      .single();
+    const { data: newPoints, error: updateError } = await supabase
+      .rpc('increment_points', { user_id: userId, increment: pointsAwarded });
 
     if (updateError) {
       console.error('Error awarding points:', updateError);
@@ -119,8 +113,9 @@ export async function POST(request: NextRequest) {
       success: true,
       pointsAwarded,
       reason,
-      newTotal: updatedProfile.points
+      newTotal: newPoints
     });
+
 
   } catch (error) {
     console.error('Points POST API error:', error);
